@@ -6,23 +6,45 @@ class SplitBillHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.orange,
+        gradient: LinearGradient(
+          colors: [Colors.orange.shade400, Colors.orange.shade600],
+        ),
         borderRadius: BorderRadius.circular(16),  
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            'Hitung Pembagian Biaya dengan Mudah',
-            style: TextStyle(
-              color: Colors.white,
-            ),
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () => Navigator.pop(context), 
+                icon: const Icon(
+                  Icons.arrow_back, 
+                  color: Colors.white
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Text(
+                "Split Bill Calculator",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
 
           const SizedBox(height: 8),
+
+          const Text(
+            "Hitung Pembagian biaya dengan mudah",
+            style: TextStyle(color: Colors.white70),
+          ),
+
+          const SizedBox(height: 12),
 
           Text(
             'Total Pengeluaran',
