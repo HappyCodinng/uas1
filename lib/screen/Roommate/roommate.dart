@@ -65,6 +65,11 @@ class _RoommatePageState extends State<RoommatePage> {
           RoommateHeader(
             controller: searchController,
             onSearch: onSearch,
+            onFilterTap: () {
+              filterKelamin = tempfilterKelamin;
+              searchController.clear();
+              loadRommate();
+            },
           ),
 
           RoommateFilter(

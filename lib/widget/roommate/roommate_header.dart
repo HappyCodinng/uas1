@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class RoommateHeader extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String)? onSearch;
+  final VoidCallback? onFilterTap;
   
   const RoommateHeader({
     super.key,
     required this.controller,
     required this.onSearch,
+    this.onFilterTap,
   });
 
   @override
@@ -66,25 +68,30 @@ class RoommateHeader extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(12),
+          InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: onFilterTap,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(12),
+              ),
+
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.filter_list, color: Colors.white),
+                  SizedBox(width: 6),
+                  Text(
+                    "Filter Pencarian",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.filter_list, color: Colors.white),
-                SizedBox(width: 6),
-                Text(
-                  "Filter Pencarian",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
+          )
         ],
       ),
     );
