@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kostcheck/widget/split_bill/section_title.dart';
 import '../../widget/split_bill/split_bill_header.dart';
-import '../../widget/split_bill/split_bill_section.dart';
 import '../../widget/split_bill/person_item.dart';
 import '../../widget/split_bill/bill_empty.dart';
 
