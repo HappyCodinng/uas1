@@ -80,23 +80,7 @@ class _RoommatePageState extends State<RoommatePage> {
               });
             },
           ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.filter_alt),
-                label: const Text("Terapkan Filter"),
-                onPressed: () {
-                  filterKelamin = tempfilterKelamin;
-                  searchController.clear();
-                  loadRommate();
-                },
-              ),
-            ),
-          ),
-
+          
           const SizedBox(height: 8),
 
           Expanded(
