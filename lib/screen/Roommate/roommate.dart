@@ -17,6 +17,7 @@ class _RoommatePageState extends State<RoommatePage> {
   List<Roommate> filteredData = [];
   bool loading = true;
   String filterKelamin = "Semua";
+  String tempfilterKelamin = "Semua";
   final TextEditingController searchController = TextEditingController();
 
   @override
@@ -67,13 +68,31 @@ class _RoommatePageState extends State<RoommatePage> {
           ),
 
           RoommateFilter(
-            selectedGender: filterKelamin,
+            selectedGender: tempfilterKelamin,
             onChanged: (value) {
-              filterKelamin = value;
-              searchController.clear();
-              loadRommate();
+              setState(() {
+                tempfilterKelamin = value;
+              });
             },
           ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.filter_alt),
+                label: const Text("Terapkan Filter"),
+                onPressed: () {
+                  filterKelamin = tempfilterKelamin;
+                  searchController.clear();
+                  loadRommate();
+                },
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 8),
 
           Expanded(
             child: loading
