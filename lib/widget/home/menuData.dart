@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kostcheck/screen/Roommate/roommate.dart';
 import 'package:kostcheck/screen/checklist/checklist.dart';
+import 'package:kostcheck/screen/split_bill/split_bill.dart';
 
 class MenuData {
   final IconData icon;
@@ -33,6 +34,7 @@ final List<MenuData> homeMenus = [
     icon: Icons.grid_view,
     title: "Split Bill",
     color: Colors.orange,
+    page: const SplitBillPage(),
   ),
   MenuData(
     icon: Icons.forum,
