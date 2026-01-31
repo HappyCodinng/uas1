@@ -9,10 +9,7 @@ class SplitBillHeader extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.orangeAccent,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(24),
-          bottomRight: Radius.circular(24),
-        ),  
+        borderRadius: BorderRadius.circular(16),  
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
