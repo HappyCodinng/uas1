@@ -11,51 +11,43 @@ class SplitBillPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F6F6),
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        elevation: 0,
-        leading: const BackButton(color: Colors.white),
-        title: const Text(
-          'Split Bill Calculator',
-          style: TextStyle(color: Colors.white),
-        ),
+      body: Column(
+        children: [
+          const SplitBillHeader(),
+
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+
+                  SectionTitle(
+                    icon: Icons.people, 
+                    title: 'Orang 2', 
+                    onAdd: () {},
+                  ),
+
+                  PersonItem(
+                    name: 'Kamu', 
+                    amount: '+Rp 0',
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  SectionTitle(
+                    icon: Icons.attach_money, 
+                    title: 'Tagihan (0)', 
+                    onAdd: () {},
+                  ),
+
+                  const BillEmpty(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SplitBillHeader(),
-
-            const SizedBox(height: 16),
-
-            SectionTitle(
-              icon: Icons.people,
-              title: 'Orang 2',
-              onAdd: () {},
-            ),
-
-            PersonItem(
-              name: 'Kamu', 
-              amount: '+Rp 0',
-              canDelete: false,
-            ),
-
-            PersonItem(
-              name: 'Temen1',
-              amount: '+Rp 0',
-              canDelete: true,
-            ),
-
-            const SizedBox(height: 16),
-            SectionTitle(
-              icon: Icons.attach_money,
-              title: "Tagihan (0)",
-              onAdd: () {},
-            ),
-            const SizedBox(height: 12),
-            const BillEmpty(),
-          ],
-        ),
-      ),
-    );
+    );  
   }
 }
