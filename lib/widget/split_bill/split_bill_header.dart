@@ -8,6 +8,7 @@ class SplitBillHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 24),
       decoration: BoxDecoration(
+        color: Colors.orangeAccent,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(24),
           bottomRight: Radius.circular(24),
