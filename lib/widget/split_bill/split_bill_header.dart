@@ -17,47 +17,54 @@ class SplitBillHeader extends StatelessWidget {
         ),  
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(
-              Icons.arrow_back, 
-              color: Colors.white
-            ),
-          ),
-
-          const SizedBox(height: 12),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Split Bill Calculator",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(
+                  Icons.arrow_back, 
+                  color: Colors.white
                 ),
+              ),
 
-                Text(
-                  'Hitung pembagian biaya dengan mudah',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12,
-                  ),
+              const SizedBox(height: 12),
+
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Split Bill Calculator",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    Text(
+                      'Hitung pembagian biaya dengan mudah',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              
+              const Icon(
+                Icons.attach_money, 
+                color: Colors.white,
+                size: 28, 
+              ),
+            ],
           ),
 
-          const Icon(
-            Icons.attach_money, 
-            color: Colors.white, 
-          ),
-
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
 
           Container(
             width: double.infinity,
