@@ -18,33 +18,40 @@ class PersonItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF1F1F1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: Colors.orange.shade100,
+            backgroundColor: Colors.orange.shade200,
             child: Text(name[0]),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(
-              name,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold
+                  )
+                ),
+
+                Text(
+                  amount,
+                  style: const TextStyle(
+                    color: Colors.green
+                  )
+                ),
+              ],
             ),
           ),
-          Text(
-            "+$amount",
-            style: const TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          if (!canDelete)
-            IconButton( 
-            icon: const Icon(Icons.delete, color: Colors.green),
-            onPressed: () {},
+          
+          if (canDelete) const Icon( 
+            Icons.delete,
+            color: Colors.orange
           ),
         ],
       ),
