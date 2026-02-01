@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kostcheck/screen/Roommate/roommate.dart';
 import 'package:kostcheck/screen/checklist/checklist.dart';
+import 'package:kostcheck/screen/community/community.dart';
 import 'package:kostcheck/screen/split_bill/split_bill.dart';
+import 'package:kostcheck/widget/community/community_header.dart';
 
 class MenuData {
   final IconData icon;
@@ -40,5 +42,6 @@ final List<MenuData> homeMenus = [
     icon: Icons.forum,
     title: "Komunitas",
     color: Colors.blue,
+    page: const CommunityPage(),
   ),
 ];
