@@ -42,6 +42,7 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
+          debugPrint("Tapped index: $index");
           setState(() => _currentIndex = index);
         },
         type: BottomNavigationBarType.fixed,
@@ -54,7 +55,7 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
-            label: "Chat",
+            label: "Chat",  
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.document_scanner),

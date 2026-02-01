@@ -8,9 +8,9 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
         child: Column(
           children: const [
             ChatHeader(),
