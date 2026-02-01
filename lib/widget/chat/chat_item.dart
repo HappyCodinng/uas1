@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../screen/chat/detail_chat.dart';
 
 class ChatItem extends StatelessWidget {
   final String name;
@@ -20,7 +21,15 @@ class ChatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // nanti arahkan ke detail chat
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (_) => ChatDetailPage(
+              name: name,
+              kosName: "Kos Melati Indah",
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
