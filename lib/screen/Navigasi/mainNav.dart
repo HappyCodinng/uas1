@@ -4,7 +4,7 @@ import 'package:kostcheck/screen/Home/homePage.dart';
 import 'package:kostcheck/screen/chat/chat.dart';
 import 'package:kostcheck/screen/laporan/laporan.dart';
 import 'package:kostcheck/screen/pembayaran/pembayaran.dart';
-import 'profile.dart';
+import 'package:kostcheck/screen/profil/profil.dart';
 
 class MainNavigation extends StatefulWidget {
   final User user;
@@ -28,7 +28,7 @@ class _MainNavigationState extends State<MainNavigation> {
       const ChatPage(),
       const LaporanPage(),
       const PembayaranPage(),
-      Profile(user: widget.user),
+      ProfilePage(user: widget.user),
     ];
   }
 
