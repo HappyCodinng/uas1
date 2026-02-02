@@ -24,22 +24,22 @@ class ChatDetailPage extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: const [
-                  ChatBubble(
+                  DetailBubble(
                     text: "Selamat siang, saya tertarik dengan kos anda",
                     isMe: true,
                     time: "09:05",
                   ),
-                  ChatBubble(
+                  DetailBubble(
                     text: "Selamat siang juga, ada yang bisa saya bantu?",
                     isMe: false,
                     time: "09:15",
                   ),
-                  ChatBubble(
+                  DetailBubble(
                     text: "Kamarnya masih tersedia untuk bulan depan?",
                     isMe: true,
                     time: "09:25",
                   ),
-                  ChatBubble(
+                  DetailBubble(
                     text: "Baik, nanti saya tunggu ya",
                     isMe: false,
                     time: "09:30",
@@ -47,7 +47,7 @@ class ChatDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const ChatInput(),
+            const DetailInput(),
           ],
         ),
       ),

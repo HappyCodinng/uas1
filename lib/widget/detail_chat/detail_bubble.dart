@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ChatBubble extends StatelessWidget {
+class DetailBubble extends StatelessWidget {
   final String text;
   final bool isMe;
   final String time;
 
-  const ChatBubble({
+  const DetailBubble({
     super.key,
     required this.text,
     required this.isMe,
@@ -30,7 +30,9 @@ class ChatBubble extends StatelessWidget {
           children: [
             Text(
               text,
-              style: TextStyle(color: isMe ? Colors.white : Colors.black),
+              style: TextStyle(
+                color: isMe ? Colors.white : Colors.black
+              ),
             ),
             const SizedBox(height: 4),
             Text(

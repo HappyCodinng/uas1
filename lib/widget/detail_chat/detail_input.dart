@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChatInput extends StatelessWidget {
-  const ChatInput({super.key});
+class DetailInput extends StatelessWidget {
+  const DetailInput({super.key});
 
   @override
   Widget build(BuildContext context) {

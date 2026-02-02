@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ChatHeaderDetail extends StatelessWidget {
+class HeaderDetail extends StatelessWidget {
   final String name;
   final String kosName;
 
-  const ChatHeaderDetail({
+  const HeaderDetail({
     super.key,
     required this.name,
     required this.kosName,
@@ -25,8 +25,20 @@ class ChatHeaderDetail extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(kosName, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+              Text(
+                name, 
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold
+                )
+              ),
+              
+              Text(
+                kosName, 
+                style: const TextStyle(
+                  fontSize: 12, 
+                  color: Colors.grey
+                )
+              ),
             ],
           ),
         ],
