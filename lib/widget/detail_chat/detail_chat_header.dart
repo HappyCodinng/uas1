@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class HeaderDetail extends StatelessWidget {
+class ChatHeaderDetail extends StatelessWidget {
   final String name;
   final String kosName;
 
-  const HeaderDetail({
+  const ChatHeaderDetail({
     super.key,
     required this.name,
     required this.kosName,
@@ -12,7 +12,7 @@ class HeaderDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [

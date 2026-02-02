@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../widget/detail_chat/detail_bubble.dart';
 import '../../widget/detail_chat/detail_input.dart';
+import '../../widget/detail_chat/detail_chat_header.dart';
 
 class ChatDetailPage extends StatelessWidget {
   final String name;
@@ -19,7 +20,11 @@ class ChatDetailPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            ChatDetailPage(name: name, kosName: kosName),
+            ChatHeaderDetail(
+              name: name, 
+              kosName: kosName
+            ),
+            
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.all(16),
