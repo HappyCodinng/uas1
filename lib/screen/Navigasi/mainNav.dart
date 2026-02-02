@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kostcheck/model/user.dart';
 import 'package:kostcheck/screen/Home/homePage.dart';
 import 'package:kostcheck/screen/chat/chat.dart';
-import 'laporan.dart';
+import 'package:kostcheck/screen/laporan/laporan.dart';
 import 'pembayaran.dart';
 import 'profile.dart';
 
@@ -26,7 +26,7 @@ class _MainNavigationState extends State<MainNavigation> {
     _pages = [
       HomePage(user: widget.user),
       const ChatPage(),
-      const Laporan(),
+      const LaporanPage(),
       const Pembayaran(),
       Profile(user: widget.user),
     ];
