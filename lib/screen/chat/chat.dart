@@ -12,7 +12,7 @@ class ChatPage extends StatelessWidget {
       color: Colors.white,
       child: SafeArea(
         child: Column(
-          children: const [
+          children: [
             ChatHeader(),
             ChatSearch(),
             Expanded(
