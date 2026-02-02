@@ -8,7 +8,7 @@ class ChatList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      children: const [
+      children: [
         ChatItem(
           name: "Ibu Melati",
           subtitle: "Kos Melati Indah",
