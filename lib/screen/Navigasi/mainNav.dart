@@ -3,7 +3,7 @@ import 'package:kostcheck/model/user.dart';
 import 'package:kostcheck/screen/Home/homePage.dart';
 import 'package:kostcheck/screen/chat/chat.dart';
 import 'package:kostcheck/screen/laporan/laporan.dart';
-import 'pembayaran.dart';
+import 'package:kostcheck/screen/pembayaran/pembayaran.dart';
 import 'profile.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -27,7 +27,7 @@ class _MainNavigationState extends State<MainNavigation> {
       HomePage(user: widget.user),
       const ChatPage(),
       const LaporanPage(),
-      const Pembayaran(),
+      const PembayaranPage(),
       Profile(user: widget.user),
     ];
   }
