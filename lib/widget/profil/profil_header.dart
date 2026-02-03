@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../model/user.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final String name;
-  final String email;
+  final User user;
 
   const ProfileHeader({
     super.key,
-    required this.name,
-    required this.email,
+    required this.user,
   });
 
   @override
@@ -15,37 +14,29 @@ class ProfileHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0xFF0D99FF),
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(24),
+        gradient: LinearGradient(
+          colors: [Color(0xFF1E88FF), Color(0xFF42A5F5)],
         ),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(24)),
       ),
       child: Row(
         children: [
-          const CircleAvatar(
-            radius: 28,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person, size: 32, color: Colors.grey),
-          ),
+          const CircleAvatar(radius: 28),
           const SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.nama,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
-                email,
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
-                ),
+                user.email,
+                style: const TextStyle(color: Colors.white70),
               ),
             ],
           ),

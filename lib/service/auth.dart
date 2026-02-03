@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:kostcheck/helper/session.dart';
 import 'package:kostcheck/model/register.dart';
-import 'package:kostcheck/model/user.dart';
+import 'package:kostcheck/screen/login.dart';
 import 'package:kostcheck/service/auth_api.dart';
 import '../model/response.dart';
+import '../model/user.dart';
 
 class AuthService {
   static Future<LoginResponse> login(
@@ -16,10 +20,11 @@ class AuthService {
       );
 
       if(response['success'] == true) {
-        return LoginResponse(
-          success: true, 
-          message: response['message'],
-          user: User.fromJSON(response['data']),
+        final user = User.fromJSON(response['data']);
+        
+        await SessionHelper.saveSession(
+          token: response['token'], 
+          userId: response['user_id'],
         );
       }
 
@@ -48,15 +53,27 @@ class AuthService {
         }
       );
 
-      print("Register Response: $response1");
+      // print("Register Response: $response1");
 
       return Register.fromJSON(response1);
     } catch (e) {
-      print("Register Error: $e");
+      // print("Register Error: $e");
       return Register (
         success: false, 
         message: "Gagal terhubung ke server",
       );
     }
+  }
+
+  static Future<void> logout(BuildContext context) async {
+    await SessionHelper.clear();
+    
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const LoginPage(),
+      ),
+      (route) => false,
+    );
   }
 }
