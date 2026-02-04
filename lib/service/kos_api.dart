@@ -6,7 +6,7 @@ import '../model/kos.dart';
 class KosApi {
   static Future<List<Kos>> getAll() async {
     final response = await http.get(
-      Uri.parse("${Api.baseUrl}/kos/get_all.php"),
+      Uri.parse("${Api.baseUrl}/kos/get_all_kos.php"),
     );
 
     final json = jsonDecode(response.body);
