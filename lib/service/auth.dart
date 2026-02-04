@@ -25,7 +25,7 @@ class AuthService {
         final user = User.fromJSON(response['data']);
 
         await SessionHelper.saveSession(
-            token: response['Token'], 
+            token: response['Token'].toString(), 
             userId: user.id,
           );
 

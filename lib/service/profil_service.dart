@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../model/user.dart';
 import '../helper/session.dart';
+import '../config/api.dart';
 
 class ProfileService {
   static Future<User> getProfile() async {
@@ -12,9 +13,10 @@ class ProfileService {
     }
 
     final response = await http.get(
-      Uri.parse("https://api.kostcheck.com/profile"),
+      Uri.parse("${Api.baseUrl}/profil/profil.php"),
       headers: {
         "Authorization": "Bearer $token",
+        "Accept": "application/json",
       },
     );
 
