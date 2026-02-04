@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../model/roommate.dart';
 import '../../service/roommate_api.dart';
 import '../../helper/session.dart';
 

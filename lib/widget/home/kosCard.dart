@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../model/kos.dart';
 
 class KosCard extends StatelessWidget {
-  const KosCard({super.key});
+  final Kos kos;
+
+  const KosCard({
+    super.key,
+    required this.kos,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,21 +35,37 @@ class KosCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Kos Melati Indah",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                children: [
+                  Text(
+                    kos.namaKos,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
+
                   SizedBox(height: 4),
-                  Text("Jl. Sudirman No.45 (0.5 km)"),
+
+                  Text(
+                    "${kos.alamat} (${kos.jarak} dari kampus)",
+                  ),
+                  
                   SizedBox(height: 6),
+
                   Row(
                     children: [
                       Icon(Icons.star, size: 16, color: Colors.amber),
-                      Text(" 4.8")
+                      Text(" ${kos.rating}")
                     ],
                   ),
+
                   SizedBox(height: 6),
-                  Text("Rp 1.200.000 / bulan",
-                      style: TextStyle(color: Colors.blue)),
+
+                  Text(
+                    "Rp. ${kos.harga} / bulan",
+                    style: TextStyle(
+                      color: Colors.blue
+                    )
+                  ),
                 ],
               ),
             ),

@@ -1,12 +1,12 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:kostcheck/widget/home/kosList.dart';
 import '../../../widget/home/header.dart';
 import '../../../widget/home/search.dart';
 import '../../../widget/home/menuGrid.dart';
 import '../../../widget/home/filter.dart';
 import '../../../widget/home/fasilitas.dart';
-import '../../../widget/home/kosCard.dart';
 import '../../model/user.dart';
 
 class HomePage extends StatelessWidget {
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               FacilitySection(),
               const SizedBox(height: 20),
-              KosCard(),
+              const KosList(),
               const SizedBox(height: 20),
             ],
           ),
