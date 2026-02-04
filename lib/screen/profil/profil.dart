@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kostcheck/model/user.dart';
+import 'package:kostcheck/widget/profil/profil_kos.dart';
 import '../../widget/profil/profil_header.dart';
 import '../../widget/profil/profil_item.dart';
 import '../../widget/profil/profil_footer.dart';
 import '../../service/auth.dart';
 import '../../service/profil_service.dart';
+import '../../widget/profil/account_setting_sheet.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;
@@ -53,6 +55,15 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             ProfileHeader(user: user),
             const SizedBox(height: 8),
+
+            ProfileKosCard(
+              namaKos: "Kos Melati Indah",
+              alamat: "Jl. Sudirman No.45",
+              harga: "Rp 1.500.000",
+            ),
+            
+            const SizedBox(height: 12),
+
             ProfileMenuItem(
               icon: Icons.history, 
               title: "Riwayat Pembayaran",
@@ -66,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ProfileMenuItem(
               icon: Icons.settings, 
               title: "Pengaturan Akun",
-              onTap: () {},
+              onTap: () => AccountSettingSheet.show(context),
             ),
             ProfileMenuItem(
               icon: Icons.help,

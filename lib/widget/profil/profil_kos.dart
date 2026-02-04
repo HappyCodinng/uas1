@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ProfileKosCard extends StatelessWidget {
-  const ProfileKosCard({super.key});
+  final String namaKos;
+  final String alamat;
+  final String harga;
+
+  const ProfileKosCard({
+    super.key,
+    required this.namaKos,
+    required this.alamat,
+    required this.harga,
+  });
 
   @override
   Widget build(BuildContext context) {

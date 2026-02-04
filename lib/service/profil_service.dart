@@ -13,7 +13,7 @@ class ProfileService {
     }
 
     final response = await http.get(
-      Uri.parse("${Api.baseUrl}/profil/profil.php"),
+      Uri.parse("${Api.baseUrl}/profil/profile.php"),
       headers: {
         "Authorization": "Bearer $token",
         "Accept": "application/json",
