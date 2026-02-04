@@ -42,7 +42,6 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
-          debugPrint("Tapped index: $index");
           setState(() => _currentIndex = index);
         },
         type: BottomNavigationBarType.fixed,

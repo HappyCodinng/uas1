@@ -19,12 +19,20 @@ class AuthService {
         }
       );
 
+      print("Login Response: $response");
+
       if(response['success'] == true) {
         final user = User.fromJSON(response['data']);
-        
+
         await SessionHelper.saveSession(
-          token: response['token'], 
-          userId: response['user_id'],
+            token: response['Token'], 
+            userId: user.id,
+          );
+
+        return LoginResponse(
+          success: true, 
+          message: response['message'],
+          user: User.fromJSON(response['data']),
         );
       }
 
@@ -35,7 +43,7 @@ class AuthService {
     } catch (e) {
       return LoginResponse(
         success: false, 
-        message: "Gagal terhubung ke server",
+        message: "Error: ${e.toString()}",
       );
     }
   }
