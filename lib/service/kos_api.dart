@@ -2,15 +2,28 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../config/api.dart';
 import '../model/kos.dart';
-import '../widget/home/search.dart';
 
 class KosApi {
-  static Future<List<Kos>> getAll({String? search}) async {
+  static Future<List<Kos>> getAll({
+    String? search,
+    String? fasilitas,
+  }) async {
     String url = "${Api.baseUrl}/kos/get_all_kos.php";
 
+    final params = <String>[];
+
     if(search != null && search.isNotEmpty) {
-      url += "?search=$Search";
+      params.add("search=$search");
     }
+
+    if(fasilitas != null && fasilitas.isNotEmpty) {
+      params.add("fasilitas=$fasilitas");
+    }
+
+    if(params.isNotEmpty) {
+      url += "?${params.join("&")}";
+    }
+
     final res = await http.get(Uri.parse(url));
     final json = jsonDecode(res.body);
 

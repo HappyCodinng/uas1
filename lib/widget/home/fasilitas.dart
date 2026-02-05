@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'kosList.dart';
 
 class FacilitySection extends StatelessWidget {
   const FacilitySection({super.key});
@@ -21,17 +22,45 @@ class FacilitySection extends StatelessWidget {
 }
 
 class _FacilityChip extends StatelessWidget {
-  final String label;
+  final String value;
   final IconData icon;
 
-  const _FacilityChip(this.label, this.icon);
+  const _FacilityChip(
+    this.value, 
+    this.icon
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Chip(
-      avatar: Icon(icon, size: 16),
-      label: Text(label),
-      backgroundColor: Colors.grey.shade200,
+    return ValueListenableBuilder<String?> (
+      valueListenable: KosList.fasilitasNotifier,
+      builder: (context, selected, _) {
+        final isActive = selected == value;
+
+        return InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            KosList.fasilitasNotifier.value = isActive ? null : value;
+          },
+
+          child: Chip(
+            avatar: Icon(
+              icon,
+              size: 16,
+              color: isActive ? Colors.blue : null,
+            ),
+            label: Text(
+              value.toUpperCase(),
+              style: TextStyle(
+                color: isActive ? Colors.blue : null,
+              ),
+            ),
+
+            backgroundColor: 
+              isActive ? Colors.blue.shade50 : Colors.grey.shade200,
+          ),
+        );
+      },
     );
   }
 }
