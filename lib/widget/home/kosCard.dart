@@ -9,6 +9,25 @@ class KosCard extends StatelessWidget {
     required this.kos,
   });
 
+  IconData getFasilitasIcon(String f) {
+    switch (f.toLowerCase()) {
+      case 'wifi':
+        return Icons.wifi;
+      case 'ac':
+        return Icons.ac_unit;
+      case 'parkir':
+        return Icons.local_parking;
+      case 'cctv':
+        return Icons.videocam;
+      case 'air':
+        return Icons.water_drop;
+      case 'listrik':
+        return Icons.flash_on;
+      default:
+        return Icons.check_circle;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,15 +65,49 @@ class KosCard extends StatelessWidget {
                   SizedBox(height: 4),
 
                   Text(
-                    "${kos.alamat} (${kos.jarak} dari kampus)",
+                    "${kos.jarak} m dari kampus",
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+
+                  if(kos.fasilitas.isNotEmpty)
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 6,
+                    children: kos.fasilitas.map((f) {
+                      return Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+
+                        child: Icon(
+                          getFasilitasIcon(f),
+                          size: 18,
+                          color: Colors.blue,
+                        ),
+                      );
+                    }).toList(),
                   ),
                   
-                  SizedBox(height: 6),
+                  const SizedBox(height: 8),
 
                   Row(
                     children: [
-                      Icon(Icons.star, size: 16, color: Colors.amber),
-                      Text(" ${kos.rating}")
+                      const Icon(
+                        Icons.star, 
+                        size: 16, 
+                        color: Colors.amber
+                      ),
+
+                      const SizedBox(width: 4),
+
+                      Text(
+                        kos.rating.toString(),
+                        style: TextStyle(
+                          fontSize: 12
+                        ),
+                      ),
                     ],
                   ),
 
@@ -63,8 +116,9 @@ class KosCard extends StatelessWidget {
                   Text(
                     "Rp. ${kos.harga} / bulan",
                     style: TextStyle(
-                      color: Colors.blue
-                    )
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
