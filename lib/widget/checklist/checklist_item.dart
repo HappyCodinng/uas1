@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../provider/checklist_provider.dart';
 
 class ChecklistItem extends StatelessWidget {
   final String title;
@@ -10,45 +12,49 @@ class ChecklistItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 6,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.radio_button_unchecked),
-              const SizedBox(width: 8),
-              Expanded(child: Text(title)),
-            ],
-          ),
-
-          const SizedBox(height: 6),
-
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/checklist-note');
-            },
-            child: const Text(
-              "+ Tambah catatan",
-              style: TextStyle(
-                color: Colors.blue,
-                fontSize: 12,
-              ),
+    final provider = context.watch<ChecklistProvider>();
+    final selected = provider.selectedItems.contains(title);
+    final note = provider.notes[title];
+    
+    return GestureDetector(
+      onTap: () => provider.toggleItem(title),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 6
             ),
-          )
-        ],
+          ],
+        ),
+
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  selected? Icons.check_circle : Icons.radio_button_unchecked,
+                  color: selected ? const Color(0xFF00C853) : Colors.grey,
+                ),
+                const SizedBox(width: 8),
+                Expanded(child: Text(title)),
+              ],
+            ),
+
+            if(note != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                note,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

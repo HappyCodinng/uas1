@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../provider/checklist_provider.dart';
 
 class ChecklistHeader extends StatelessWidget {
   const ChecklistHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ChecklistProvider>();
+
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       decoration: const BoxDecoration(
@@ -33,7 +37,7 @@ class ChecklistHeader extends StatelessWidget {
           const SizedBox(height: 12),
 
           LinearProgressIndicator(
-            value: 0.0,
+            value: provider.progress,
             backgroundColor: Colors.white24,
             color: Colors.white,
           ),
@@ -42,11 +46,30 @@ class ChecklistHeader extends StatelessWidget {
 
           Row(
             children: [
-              _actionButton(Icons.refresh, "Reset"),
+              _actionButton(
+                Icons.refresh, 
+                "Reset",
+                () => provider.reset(),
+              ),
               const SizedBox(width: 8),
-              _actionButton(Icons.add, "Tambah"),
+              _actionButton(
+                Icons.add, 
+                "Tambah",
+                () {
+                  if (provider.lastSelectedItem != null) {
+                    Navigator.pushNamed(
+                      context, 
+                      '/checklist-note'
+                    );
+                  }
+                },
+              ),
               const SizedBox(width: 8),
-              _actionButton(Icons.share, "Export"),
+              _actionButton(
+                Icons.share, 
+                "Export",
+                () {}
+              ),
             ],
           )
         ],
@@ -54,22 +77,29 @@ class ChecklistHeader extends StatelessWidget {
     );
   }
 
-  Widget _actionButton(IconData icon, String label) {
+  Widget _actionButton(
+    IconData icon, 
+    String label,
+    VoidCallback onTap
+  ) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.15),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 18),
-            const SizedBox(width: 6),
-            Text(label, style: const TextStyle(color: Colors.white)),
-          ],
-        ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 18),
+              const SizedBox(width: 6),
+              Text(label, style: const TextStyle(color: Colors.white)),
+            ],
+          ),
+        )
       ),
     );
   }

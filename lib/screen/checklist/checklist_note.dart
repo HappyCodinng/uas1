@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../provider/checklist_provider.dart';
 
 class ChecklistNotePage extends StatelessWidget {
   const ChecklistNotePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.read<ChecklistProvider>();
+    final controller = TextEditingController();
+    final title = provider.lastSelectedItem ?? "-";
+
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.4),
       body: Center(
@@ -21,14 +27,15 @@ class ChecklistNotePage extends StatelessWidget {
             children: [
               const Text(
                 "Catatan Untuk:",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold)
               ),
               const SizedBox(height: 4),
-              const Text("Ukuran kamar sesuai dengan kebutuhan"),
+              Text(title),
 
               const SizedBox(height: 12),
 
               TextField(
+                controller: controller,
                 maxLines: 4,
                 decoration: InputDecoration(
                   hintText: "Tulis catatan disini...",
@@ -54,7 +61,13 @@ class ChecklistNotePage extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        provider.addNote(
+                          title, 
+                          controller.text
+                        );
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00C853),
                       ),
