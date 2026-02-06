@@ -4,10 +4,7 @@ import '../../model/kos.dart';
 class KosCard extends StatelessWidget {
   final Kos kos;
 
-  const KosCard({
-    super.key,
-    required this.kos,
-  });
+  const KosCard({super.key, required this.kos});
 
   IconData getFasilitasIcon(String f) {
     switch (f.toLowerCase()) {
@@ -28,102 +25,155 @@ class KosCard extends StatelessWidget {
     }
   }
 
+  Color getTipeColor() {
+    switch (kos.tipeKos.toLowerCase()) {
+      case 'putri':
+        return Colors.pink.shade100;
+      case 'putra':
+        return Colors.blue.shade100;
+      default:
+        return Colors.green.shade100;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          )
+        ],
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              bottomLeft: Radius.circular(16),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(20),
             ),
             child: Image.network(
               "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
-              width: 110,
-              height: 110,
+              height: 170,
+              width: double.infinity,
               fit: BoxFit.cover,
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    kos.namaKos,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    )
-                  ),
 
-                  SizedBox(height: 4),
-
-                  Text(
-                    "${kos.jarak} m dari kampus",
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-
-                  if(kos.fasilitas.isNotEmpty)
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 6,
-                    children: kos.fasilitas.map((f) {
-                      return Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          color: Colors.blue.shade50,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-
-                        child: Icon(
-                          getFasilitasIcon(f),
-                          size: 18,
-                          color: Colors.blue,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  
-                  const SizedBox(height: 8),
-
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star, 
-                        size: 16, 
-                        color: Colors.amber
-                      ),
-
-                      const SizedBox(width: 4),
-
-                      Text(
-                        kos.rating.toString(),
-                        style: TextStyle(
-                          fontSize: 12
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        kos.namaKos,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-
-                  SizedBox(height: 6),
-
-                  Text(
-                    "Rp. ${kos.harga} / bulan",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                ],
-              ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: getTipeColor(),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        kos.tipeKos,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 6),
+
+                Row(
+                  children: [
+                    const Icon(Icons.star, size: 16, color: Colors.amber),
+                    const SizedBox(width: 4),
+                    Text(
+                      kos.rating.toString(),
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 6),
+
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        "${kos.alamat} (${kos.jarak} m)",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 10),
+
+                Wrap(
+                  spacing: 10,
+                  children: kos.fasilitas.map((f) {
+                    return Icon(
+                      getFasilitasIcon(f),
+                      size: 20,
+                      color: Colors.grey.shade700,
+                    );
+                  }).toList(),
+                ),
+
+                const SizedBox(height: 12),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Rp ${kos.harga.toString()}/bulan",
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      "3 kamar tersedia",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
