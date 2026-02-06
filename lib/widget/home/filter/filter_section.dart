@@ -9,9 +9,9 @@ class FilterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        PriceFilter(),
+        PriceFilterSlider(),
         SizedBox(height: 12),
-        DistanceFilter(),
+        DistanceFilterSlider(),
       ],
     );
   }
