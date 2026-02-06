@@ -16,7 +16,7 @@ class FilterSection extends StatelessWidget {
               value: (value ?? 2000000).toDouble(),
               min: 500000,
               max: 2000000,
-              divisions: 9,
+              divisions: 10,
               label: "Rp. ${(value ?? 2000000)}",
               onChanged: (val) {
                 KosFilter.maxHarga.value = val.toInt();
