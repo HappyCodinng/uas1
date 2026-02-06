@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ChecklistProvider extends ChangeNotifier {
-  final List<String> items = [
-    "Ukuran kamar sesuai dengan kebutuhan",
-    "Ventilasi udara memadai",
-    "Kondisi dinding, lantai dan plafon baik",
-    "Pintu dan jendela berfungsi dengan baik",
-    "Kebersihan kamar mandi",
-    "Ada lemari / tempat penyimpanan",
-    "Air mengalir lancar",
-    "Wifi stabil dan cepat",
-  ];
-
   final Set<String> selectedItems = {};
   final Map<String, String> notes = {};
 
@@ -27,7 +16,7 @@ class ChecklistProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addNote(String title, String note) {
+  void saveNote(String title, String note) {
     notes[title] = note;
     notifyListeners();
   }
@@ -39,6 +28,8 @@ class ChecklistProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double get progress =>
-      items.isEmpty ? 0 : selectedItems.length / items.length;
+  double get progress {
+    if (selectedItems.isEmpty) return 0;
+    return selectedItems.length / 8;
+  }
 }

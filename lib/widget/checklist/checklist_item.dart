@@ -13,9 +13,9 @@ class ChecklistItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ChecklistProvider>();
-    final selected = provider.selectedItems.contains(title);
+    final checked = provider.selectedItems.contains(title);
     final note = provider.notes[title];
-    
+
     return GestureDetector(
       onTap: () => provider.toggleItem(title),
       child: Container(
@@ -27,32 +27,36 @@ class ChecklistItem extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 6
+              blurRadius: 6,
             ),
           ],
         ),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 Icon(
-                  selected? Icons.check_circle : Icons.radio_button_unchecked,
-                  color: selected ? const Color(0xFF00C853) : Colors.grey,
+                  checked
+                      ? Icons.check_circle
+                      : Icons.radio_button_unchecked,
+                  color: checked ? Colors.green : Colors.grey,
                 ),
                 const SizedBox(width: 8),
                 Expanded(child: Text(title)),
               ],
             ),
 
-            if(note != null) ...[
+            if (note != null && note.isNotEmpty) ...[
               const SizedBox(height: 6),
               Text(
                 note,
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-            ],
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              )
+            ]
           ],
         ),
       ),
