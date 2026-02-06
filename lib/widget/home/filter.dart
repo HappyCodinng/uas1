@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../service/kos_filter.dart';
 
 class FilterSection extends StatelessWidget {
   const FilterSection({super.key});
@@ -7,17 +8,40 @@ class FilterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text("Range Harga", style: TextStyle(fontWeight: FontWeight.bold)),
-        Slider(value: 0.5, onChanged: null),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text("Rp 0"), Text("Rp 1.500.000")],
+      children: [
+        ValueListenableBuilder<int?>(
+          valueListenable: KosFilter.maxHarga,
+          builder: (context, value, _) {
+            return Slider(
+              value: (value ?? 2000000).toDouble(),
+              min: 500000,
+              max: 2000000,
+              divisions: 9,
+              label: "Rp. ${(value ?? 2000000)}",
+              onChanged: (val) {
+                KosFilter.maxHarga.value = val.toInt();
+              },
+            );
+          },
         ),
-        SizedBox(height: 12),
-        Text("Jarak Maksimal", style: TextStyle(fontWeight: FontWeight.bold)),
-        Slider(value: 0.3, onChanged: null),
-        Center(child: Text("5 km dari kampus")),
+
+        const SizedBox(height: 8),
+
+        ValueListenableBuilder<int?>(
+          valueListenable: KosFilter.maxJarak,
+          builder: (context, value, _) {
+            return Slider(
+              value: (value ?? 1000).toDouble(),
+              min: 100,
+              max: 1000,
+              divisions: 9,
+              label: "${value ?? 1000} dari kampus",
+              onChanged: (val) {
+                KosFilter.maxJarak.value = val.toInt();
+              },
+            );
+          },
+        ),
       ],
     );
   }

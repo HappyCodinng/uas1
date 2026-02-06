@@ -7,21 +7,25 @@ class KosApi {
   static Future<List<Kos>> getAll({
     String? search,
     String? fasilitas,
+    int? maxHarga,
+    int? maxJarak,
   }) async {
-    String url = "${Api.baseUrl}/kos/get_all_kos.php";
+    String url = "${Api.baseUrl}/kos/get_all_kos.php?";
 
-    final params = <String>[];
-
-    if(search != null && search.isNotEmpty) {
-      params.add("search=$search");
+    if (search != null && search.isNotEmpty) {
+      url += "search=$search&";
     }
 
-    if(fasilitas != null && fasilitas.isNotEmpty) {
-      params.add("fasilitas=$fasilitas");
+    if (fasilitas != null && fasilitas.isNotEmpty) {
+      url += "fasilitas=$fasilitas&";
     }
 
-    if(params.isNotEmpty) {
-      url += "?${params.join("&")}";
+    if (maxHarga != null) {
+      url += "max_harga=$maxHarga&";
+    }
+
+    if (maxJarak != null) {
+      url += "max_jarak=$maxJarak&";
     }
 
     final res = await http.get(Uri.parse(url));

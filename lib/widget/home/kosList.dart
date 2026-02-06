@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../service/kos_service.dart';
+import '../../service/kos_filter.dart';
+import '../../model/kos.dart';
 import 'kosCard.dart';
 
 class KosList extends StatelessWidget {
@@ -10,37 +12,54 @@ class KosList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String?> (
+    return ValueListenableBuilder<String?>(
       valueListenable: searchNotifier,
-      builder: (_, search, _) {
-        return ValueListenableBuilder<String?> (
+      builder: (_, search, __) {
+        return ValueListenableBuilder<String?>(
           valueListenable: fasilitasNotifier,
-          builder: (_, fasilitas, _) {
-            return FutureBuilder(
-              future: KosService.getKos(
-                search: search,
-                fasilitas: fasilitas,
-              ),
-              builder: (context, Snapshot) {
-                if(Snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
+          builder: (_, fasilitas, __) {
+            return ValueListenableBuilder<int?>(
+              valueListenable: KosFilter.maxHarga,
+              builder: (_, maxHarga, __) {
+                return ValueListenableBuilder<int?>(
+                  valueListenable: KosFilter.maxJarak,
+                  builder: (_, maxJarak, __) {
+                    return FutureBuilder<List<Kos>>(
+                      future: KosService.getKos(
+                        search: search,
+                        fasilitas: fasilitas,
+                        maxHarga: maxHarga,
+                        maxJarak: maxJarak,
+                      ),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
 
-                if(!Snapshot.hasData || Snapshot.data!.isEmpty) {
-                  return const Text("Kos Tidak ditemukan");
-                }
+                        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return const Text("Kos tidak ditemukan");
+                        }
 
-                return Column(
-                  children: Snapshot.data!
-                  .map((kos) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: KosCard(kos: kos),
-                    ))
-                    .toList(),
+                        return Column(
+                          children: snapshot.data!
+                              .map(
+                                (kos) => Padding(
+                                  padding:
+                                      const EdgeInsets.only(bottom: 16),
+                                  child: KosCard(kos: kos),
+                                ),
+                              )
+                              .toList(),
+                        );
+                      },
+                    );
+                  },
                 );
               },
             );
-          }
+          },
         );
       },
     );
