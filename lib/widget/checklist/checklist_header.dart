@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kostcheck/screen/checklist/checklist_note.dart';
 import 'package:provider/provider.dart';
 import '../../provider/checklist_provider.dart';
 
@@ -57,9 +58,11 @@ class ChecklistHeader extends StatelessWidget {
                 "Tambah",
                 () {
                   if (provider.lastSelectedItem != null) {
-                    Navigator.pushNamed(
-                      context, 
-                      '/checklist-note'
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ChecklistNotePage(),
+                      ),
                     );
                   }
                 },
