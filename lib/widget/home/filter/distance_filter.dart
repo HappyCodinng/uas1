@@ -1,40 +1,48 @@
 import 'package:flutter/material.dart';
-import '../../../service/kos_filter.dart';
-import 'filter_card.dart';
+import 'package:kostcheck/service/kos_filter.dart';
 
 class DistanceFilter extends StatelessWidget {
   const DistanceFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FilterCard(
-      icon: Icons.location_on,
-      title: "Jarak Maksimal",
-      child: ValueListenableBuilder<int?>(
-        valueListenable: KosFilter.maxJarak,
-        builder: (_, value, __) {
-          final jarak = value ?? 5000;
+    return ValueListenableBuilder<int?>(
+      valueListenable: KosFilter.maxJarak,
+      builder: (_, value, __) {
+        final jarak = value ?? 1000;
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Slider(
-                value: jarak.toDouble(),
-                min: 0,
-                max: 5000,
-                divisions: 10,
-                onChanged: (val) {
-                  KosFilter.maxJarak.value = val.toInt();
-                },
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Jarak Maksimal",
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+
+            const SizedBox(height: 4),
+
+            Text(
+              "$jarak meter dari kampus",
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
               ),
-              Text(
-                "${jarak ~/ 1000} km dari kampus",
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
-          );
-        },
-      ),
+            ),
+
+            Slider(
+              value: jarak.toDouble(),
+              min: 100,
+              max: 1000,
+              divisions: 9,
+              label: "$jarak m",
+              onChanged: (val) {
+                KosFilter.maxJarak.value = val.toInt();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

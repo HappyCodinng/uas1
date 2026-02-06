@@ -5,39 +5,52 @@ import 'filter_card.dart';
 class PriceFilter extends StatelessWidget {
   const PriceFilter({super.key});
 
+  String  formatRupiah(int value) {
+    return "Rp ${value.toString().replaceAllMapped(
+      RegExp(r'\B(?=(\d{3})+(?!\d))'),
+      (m) => '.',
+    )}";
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FilterCard(
-      icon: Icons.attach_money,
-      title: "Range Harga",
-      child: ValueListenableBuilder<int?>(
-        valueListenable: KosFilter.maxHarga,
-        builder: (_, value, __) {
-          final harga = value ?? 1500000;
+    return ValueListenableBuilder<int?>(
+      valueListenable: KosFilter.maxHarga,
+      builder: (_, value, __) {
+        final harga = value ?? 2000000;
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Slider(
-                value: harga.toDouble(),
-                min: 0,
-                max: 1500000,
-                divisions: 15,
-                onChanged: (val) {
-                  KosFilter.maxHarga.value = val.toInt();
-                },
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Harga Maksimal",
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+
+            const SizedBox(height: 4),
+
+            Text(
+              formatRupiah(harga),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Rp 0", style: TextStyle(fontSize: 12)),
-                  Text("Rp 1.500.000", style: TextStyle(fontSize: 12)),
-                ],
-              ),
-            ],
-          );
-        },
-      ),
+            ),
+
+            Slider(
+              value: harga.toDouble(),
+              min: 0,
+              max: 2000000,
+              divisions: 15,
+              label: formatRupiah(harga),
+              onChanged: (val) {
+                KosFilter.maxHarga.value = val.toInt();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
