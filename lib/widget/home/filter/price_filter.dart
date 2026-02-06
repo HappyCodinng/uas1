@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../service/kos_filter.dart';
-import 'filter_card.dart';
 
 class PriceFilter extends StatelessWidget {
   const PriceFilter({super.key});
