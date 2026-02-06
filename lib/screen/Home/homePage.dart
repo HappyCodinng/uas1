@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               const MenuGrid(),
               const SizedBox(height: 20),
-              FilterSection(),
+              const FilterSectionWrapper(),
               const SizedBox(height: 20),
               FacilitySection(),
               const SizedBox(height: 20),
